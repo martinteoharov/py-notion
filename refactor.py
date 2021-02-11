@@ -77,7 +77,13 @@ for file_zip in files_zip:
 
     os.rename(html_path, target_name_html_out)
 
-    existing_images = os.listdir(target_name_dir_out)
-    for _ in os.listdir(dir_name):
-        if _ not in existing_images:
-            shutil.move(os.path.join(dir_name, _), target_name_dir_out)
+    existing_images = []
+    if(os.path.isdir(target_name_dir_out)):
+        existing_images = os.listdir(target_name_dir_out)
+    else:
+        os.mkdir(target_name_dir_out)
+
+    if(os.path.isdir(dir_name)):
+        for _ in os.listdir(dir_name):
+            if _ not in existing_images:
+                shutil.move(os.path.join(dir_name, _), target_name_dir_out)
